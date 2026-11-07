@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2b190f">
+  <title>Lippy Biblioteca</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark">L</span><span>Biblioteca</span></div>
+    <nav>
+      <button class="nav-item active" data-category="Todas">⌂ <span>Início</span></button>
+      <button class="nav-item" id="discover">⌕ <span>Descobrir</span></button>
+      <div class="nav-caption">MINHA BIBLIOTECA</div>
+      {% for category in categories %}
+      <button class="nav-item category-link" data-category="{{ category }}">▤ <span>{{ category }}</span></button>
+      {% endfor %}
+      <button class="nav-item" id="favorites">♡ <span>Favoritos</span></button>
+    </nav>
+    <div class="sidebar-bottom"><span class="status-dot"></span> Biblioteca local</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
+      <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Pesquisar seus livros..." autocomplete="off"></label>
+      <div class="top-actions"><span class="local-label">● OFFLINE</span><div class="avatar">L</div></div>
+    </header>
+
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">SUA ESTANTE DIGITAL</p>
+        <h1>Uma boa leitura<br><em>começa aqui.</em></h1>
+        <p class="subline">Seus livros, organizados em um só lugar.</p>
+      </div>
+      <div class="shelf-art" aria-hidden="true">
+        <div class="shelf-books"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="shelf-board"></div>
+      </div>
+    </section>
+
+    <section class="section-head">
+      <div><p class="eyebrow">COLEÇÃO PESSOAL</p><h2 id="sectionTitle">Minha estante</h2></div>
+      <span class="count" id="bookCount">Carregando...</span>
+    </section>
+
+    <div class="chips" id="chips">
+      <button class="chip selected" data-category="Todas">Todos</button>
+      {% for category in categories %}
+      <button class="chip" data-category="{{ category }}">{{ category }}</button>
+      {% endfor %}
+    </div>
+
+    <section id="bookGrid" class="book-grid" aria-live="polite">
+      <div class="loading">Organizando a estante...</div>
+    </section>
+
+    <section class="empty-state" id="emptyState" hidden>
+      <div class="empty-icon">▤</div><h3>Nenhum livro encontrado</h3>
+      <p>Adicione PDFs à sua pasta biblioteca no Termux ou ajuste a pesquisa.</p>
+    </section>
+
+    <footer> LIPPY BIBLIOTECA <span>•</span> Seus arquivos permanecem no dispositivo.</footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
